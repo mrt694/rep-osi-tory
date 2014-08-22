@@ -1,0 +1,8 @@
+package prOrdVirtual;
+
+public class Controlador {
+
+	public void calcularPrioridad(Operacion op) {
+		
+	}
+}
