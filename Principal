@@ -1,0 +1,70 @@
+package prOrdVirtual;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Principal {
+
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+
+        //CREAMOS DATOS
+        Dato<Integer> d = new Dato<Integer>(1);
+        Dato<Integer> d2 = new Dato<Integer>(4);
+        Dato<Integer> d3 = new Dato<Integer>(2);
+
+        //AGRUPAMOS DATOS
+        List<Dato> l = new ArrayList<Dato>();
+        l.add(d);
+        l.add(d2);
+        l.add(d3);
+        l.add(d3);
+        l.add(d2);
+        l.add(d3);
+        l.add(d3);
+        l.add(d);
+
+        List<Dato> l2 = new ArrayList<Dato>();
+        l2.add(d);
+        l2.add(d2);
+
+        List<Dato> l3 = new ArrayList<Dato>();
+        l3.add(d);
+        l3.add(d2);
+        l3.add(d3);
+
+        //CREAMOS OPERACIONES
+        Operacion op = new Operacion("add", l);
+        Operacion op2 = new Operacion("sub", l2);
+        Operacion op3 = new Operacion("mul", l3);
+        Operacion op4 = new Operacion("shl", l2);
+
+        //AGRUPAMOS OPERACIONES
+        List<Operacion> lOperaciones = new ArrayList<Operacion>();
+
+        lOperaciones.add(op);
+        lOperaciones.add(op2);
+        lOperaciones.add(op3);
+        lOperaciones.add(op4);
+
+        //CREAMOS UN BUS
+        Bus bus = new Bus();
+        //CREAMOS UN MICRO
+        Microprocesador micro = new Microprocesador(bus);
+
+        //CREAMOS EL CONTROLADOR Y LA RAM
+        Controlador ctr = new Controlador();
+        Ram ram = new Ram(lOperaciones, 2, bus, ctr);
+        System.out.println(ram);
+
+        //CONFIGURAMOS EL CONTROLADOR
+        ctr.setConfig(ram, micro);
+
+        //EJECUTAMOS EL PROGRAMA
+        ctr.ejecutar();
+
+    }
+
+}
