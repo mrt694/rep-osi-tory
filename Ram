@@ -1,0 +1,56 @@
+package prOrdVirtual;
+
+import java.util.SortedMap;
+import java.util.List;
+
+public class Ram {
+
+	private int tambloque;
+	private Bus bus;
+	private List<Operacion> op;
+	private SortedMap<Integer, List<Operacion>> memoria;
+	private Controlador contr;
+	private int bloqueActual;
+
+	public Ram(List<Operacion> lop, int tam, Bus bus, Controlador contr) {
+
+		memoria = dividirEnBloques(lop);
+		this.op = lop;
+		tambloque = tam;
+		this.bus = bus;
+		this.contr = contr;
+
+	}
+
+	private SortedMap<Integer, List<Operacion>> dividirEnBloques(
+			List<Operacion> l) {
+
+		Integer cont = 0;
+		int i = 0;
+		List<Operacion> aux = null;
+		Integer aux1 = 0;
+
+		while (i < l.size()) {
+
+			aux.set(cont, l.get(i));
+			cont++;
+			if (cont == tambloque) {
+				memoria.put(aux1, aux);
+				cont = 0;
+				aux1++;
+			}
+
+			i++;
+		}
+		return memoria;
+	}
+
+	public List<Operacion> putBloque() {
+		
+		bloqueActual++;
+	}
+
+	public int estadoRam() {
+
+	}
+}
